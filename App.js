@@ -10,10 +10,22 @@ export default class App extends Component {
 
   //function to contact the backend API
   saveData (data){
-    console.log(data)
-    fetch('https://jsonplaceholder.typicode.com/todos/1').then((res)=>{
-      console.log(res)
+    fetch('http://192.168.1.10:3000/saveData', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      QRURL: data
     })
+  }).then((res)=>{
+    console.log(res)
+  }).catch(function(error) {
+    console.log(error.message);
+     // ADD THIS THROW error
+      throw error;
+    });
   }
 
   //this function is to display the QR code data
